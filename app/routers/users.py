@@ -2,33 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_session
+from app.dependencies import get_current_user
+from app.models.user import User
 from app.repositories.user_repository import UserRepository
-from app.schemas.user import UserCreate, UserOut
+from app.schemas.user import UserUpdate, UserOut
 
 router = APIRouter(prefix="/users", tags=["Users"])
-
-
-@router.post("", response_model=UserOut, status_code=status.HTTP_201_CREATED)
-async def create_user(
-    user_data: UserCreate,
-    session: AsyncSession = Depends(get_session),
-):
-    """Создать нового пользователя."""
-    repo = UserRepository(session)
-
-    # Проверяем уникальность username и email
-    if await repo.get_by_username(user_data.username):
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Пользователь с таким username уже существует",
-        )
-    if await repo.get_by_email(user_data.email):
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Пользователь с таким email уже существует",
-        )
-
-    return await repo.create(user_data)
 
 
 @router.get("", response_model=list[UserOut])
@@ -36,6 +15,12 @@ async def get_all_users(session: AsyncSession = Depends(get_session)):
     """Получить список всех пользователей."""
     repo = UserRepository(session)
     return await repo.get_all()
+
+
+@router.get("/me", response_model=UserOut)
+async def get_my_profile(current_user: User = Depends(get_current_user)):
+    """Получить профиль текущего авторизованного пользователя."""
+    return current_user
 
 
 @router.get("/{user_id}", response_model=UserOut)
@@ -57,16 +42,23 @@ async def get_user(
 @router.put("/{user_id}", response_model=UserOut)
 async def update_user(
     user_id: int,
-    user_data: UserCreate,
+    user_data: UserUpdate,
     session: AsyncSession = Depends(get_session),
+    current_user: User = Depends(get_current_user),
 ):
-    """Обновить данные пользователя."""
+    """Обновить свои данные. Менять можно только себя."""
+    if current_user.id != user_id and not current_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Можно редактировать только свой профиль",
+        )
+
     repo = UserRepository(session)
     updated = await repo.update(
         user_id=user_id,
         username=user_data.username,
         email=user_data.email,
-        hashed_password=user_data.password,
+        password=user_data.password,
     )
     if updated is None:
         raise HTTPException(
@@ -80,8 +72,15 @@ async def update_user(
 async def delete_user(
     user_id: int,
     session: AsyncSession = Depends(get_session),
+    current_user: User = Depends(get_current_user),
 ):
-    """Удалить пользователя."""
+    """Удалить пользователя. Удалить можно только себя (или админ — кого угодно)."""
+    if current_user.id != user_id and not current_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Можно удалить только свой профиль",
+        )
+
     repo = UserRepository(session)
     deleted = await repo.delete(user_id)
     if not deleted:

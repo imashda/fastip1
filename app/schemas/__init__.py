@@ -1,1 +1,1 @@
-from app.schemas.user import UserCreate, UserOut
+from app.schemas.user import UserCreate, UserUpdate, UserOut, Token
