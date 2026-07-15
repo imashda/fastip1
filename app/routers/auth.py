@@ -16,7 +16,6 @@ async def register(
     user_data: UserCreate,
     session: AsyncSession = Depends(get_session),
 ):
-    """Регистрация нового пользователя."""
     repo = UserRepository(session)
 
     if await repo.get_by_username(user_data.username):
@@ -32,7 +31,16 @@ async def register(
             detail="Пользователь с таким email уже существует",
         )
 
-    return await repo.create(user_data)
+    user = await repo.create(user_data)
+
+    all_users = await repo.get_all()
+    if len(all_users) == 1:
+        user.is_admin = True
+        await session.commit()
+        await session.refresh(user)
+        logger.info(f"Первый пользователь {user.username} назначен администратором")
+
+    return user
 
 
 @router.post("/login", response_model=Token)
@@ -40,7 +48,6 @@ async def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     session: AsyncSession = Depends(get_session),
 ):
-    """Авторизация. Возвращает JWT токен при успешном логине."""
     repo = UserRepository(session)
     user = await repo.get_by_username(form_data.username)
 
