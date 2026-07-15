@@ -15,7 +15,6 @@
 }
 body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; display: flex; min-height: 100vh; overflow-x: hidden; }
 
-/* SIDEBAR */
 #sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 200; }
 .sidebar-logo { padding: 20px 20px 16px; font-size: 20px; font-weight: 800; border-bottom: 1px solid var(--border); }
 .sidebar-logo span { color: var(--accent); }
@@ -34,17 +33,14 @@ body { background: var(--bg); color: var(--text); font-family: system-ui, sans-s
 .user-chip-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .user-chip-role { font-size: 11px; color: var(--text-dim); }
 
-/* MAIN */
 #main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
 .topbar { height: 56px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; position: sticky; top: 0; z-index: 100; }
 .topbar-title { font-size: 16px; font-weight: 700; flex: 1; }
 .page-content { padding: 28px; flex: 1; }
 
-/* PAGES */
 .page { display: none; }
 .page.active { display: block; }
 
-/* AUTH */
 #page-auth { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 999; align-items: center; justify-content: center; }
 #page-auth.active { display: flex; }
 .auth-box { width: 100%; max-width: 380px; padding: 20px; }
@@ -53,7 +49,6 @@ body { background: var(--bg); color: var(--text); font-family: system-ui, sans-s
 .auth-sub { text-align: center; color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
 .auth-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
 
-/* FORM */
 .form-group { margin-bottom: 14px; }
 label { display: block; font-size: 11px; font-weight: 700; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
 input, select, textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 10px 14px; font-size: 14px; outline: none; transition: border-color 0.15s; font-family: inherit; }
@@ -61,7 +56,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); }
 textarea { resize: vertical; min-height: 80px; }
 select option { background: var(--surface2); }
 
-/* BUTTONS */
 .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 8px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent2); }
@@ -74,28 +68,23 @@ select option { background: var(--surface2); }
 .btn-full { width: 100%; justify-content: center; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ALERTS */
 .alert { padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 14px; display: none; }
 .alert.show { display: block; }
 .alert-error { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); color: #fca5a5; }
 .alert-success { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--success); }
 
-/* TABS */
 .tabs { display: flex; gap: 2px; background: var(--surface2); border-radius: 8px; padding: 4px; margin-bottom: 20px; }
 .tab { flex: 1; padding: 7px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--text-dim); border: none; background: none; font-family: inherit; transition: all 0.15s; }
 .tab.active { background: var(--surface); color: var(--text); font-weight: 600; }
 
-/* CARDS */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
 .card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 16px; }
 
-/* STATS */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
 .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
 .stat-value { font-size: 28px; font-weight: 800; }
 .stat-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
 
-/* KANBAN */
 .kanban-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
 .kanban-board { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 16px; }
 .kanban-col { flex-shrink: 0; width: 240px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; max-height: calc(100vh - 200px); }
@@ -104,7 +93,6 @@ select option { background: var(--surface2); }
 .col-count { margin-left: auto; background: var(--surface2); color: var(--text-dim); font-size: 11px; padding: 2px 7px; border-radius: 10px; }
 .kanban-cards { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
 
-/* TASK CARD */
 .task-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; }
 .task-card:hover { border-color: var(--accent); background: var(--surface3); }
 .task-card-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
@@ -116,13 +104,11 @@ select option { background: var(--surface2); }
 .p-high { background: rgba(248,113,113,0.12); color: var(--danger); }
 .p-critical { background: rgba(248,113,113,0.2); color: #ff4444; border: 1px solid rgba(248,113,113,0.3); }
 
-/* STATUS BTNS */
 .status-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .status-btn { font-size: 11px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim); cursor: pointer; font-family: inherit; transition: all 0.15s; }
 .status-btn:hover { border-color: var(--accent); color: var(--accent); }
 .status-btn.current { background: rgba(124,109,250,0.15); color: var(--accent); border-color: var(--accent); }
 
-/* MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
@@ -132,20 +118,17 @@ select option { background: var(--surface2); }
 .modal-close:hover { color: var(--text); background: var(--surface2); }
 .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
 
-/* USERS TABLE */
 .users-table { width: 100%; border-collapse: collapse; }
 .users-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 8px 12px; border-bottom: 1px solid var(--border); }
 .users-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
 .users-table tr:last-child td { border-bottom: none; }
 .users-table tbody tr:hover td { background: var(--surface2); }
 
-/* BADGE */
 .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
 .badge-admin { background: rgba(124,109,250,0.15); color: var(--accent); border: 1px solid rgba(124,109,250,0.3); }
 .badge-user { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
 .badge-you { background: rgba(74,222,128,0.1); color: var(--success); border: 1px solid rgba(74,222,128,0.2); }
 
-/* TOAST */
 #toast { position: fixed; bottom: 20px; right: 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; font-size: 13px; z-index: 9999; transform: translateY(60px); opacity: 0; transition: all 0.2s; max-width: 300px; }
 #toast.show { transform: translateY(0); opacity: 1; }
 #toast.toast-success { border-color: rgba(74,222,128,0.4); color: var(--success); }
@@ -223,11 +206,18 @@ select option { background: var(--surface2); }
 
     <!-- DASHBOARD -->
     <div id="page-dashboard" class="page">
-      <div class="stats-grid">
+      <div class="stats-grid" id="stats-grid">
         <div class="stat-card"><div class="stat-value" id="st-total" style="color:var(--accent)">—</div><div class="stat-label">Всего задач</div></div>
         <div class="stat-card"><div class="stat-value" id="st-progress" style="color:var(--info)">—</div><div class="stat-label">В работе</div></div>
         <div class="stat-card"><div class="stat-value" id="st-done" style="color:var(--success)">—</div><div class="stat-label">Готово</div></div>
         <div class="stat-card"><div class="stat-value" id="st-critical" style="color:var(--danger)">—</div><div class="stat-label">Критических</div></div>
+      </div>
+      <!-- Только для админа -->
+      <div id="admin-stats" style="display:none">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:24px">
+          <div class="stat-card"><div class="stat-value" id="st-users" style="color:var(--warn)">—</div><div class="stat-label">Пользователей</div></div>
+          <div class="stat-card"><div class="stat-value" id="st-admins" style="color:var(--accent)">—</div><div class="stat-label">Администраторов</div></div>
+        </div>
       </div>
       <div class="card">
         <div class="card-title">Последние задачи</div>
@@ -335,7 +325,6 @@ select option { background: var(--surface2); }
     <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center">
       <span id="td-priority" class="priority-badge"></span>
       <span id="td-status-badge" class="badge badge-user"></span>
-      <span style="font-size:11px;color:var(--text-muted)" id="td-owner"></span>
     </div>
     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-dim);margin-bottom:10px">Перевести в статус</div>
     <div class="status-btns" id="td-status-btns"></div>
@@ -346,7 +335,6 @@ select option { background: var(--surface2); }
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
@@ -356,14 +344,14 @@ let me = null;
 let currentTaskId = null;
 
 const STATUSES = [
-  { key: 'backlog',     label: 'Backlog',      color: '#6b7099' },
-  { key: 'todo',        label: 'To Do',        color: '#60a5fa' },
-  { key: 'in_progress', label: 'In Progress',  color: '#fbbf24' },
-  { key: 'review',      label: 'Review',       color: '#a78bfa' },
-  { key: 'done',        label: 'Done',         color: '#4ade80' },
+  { key: 'backlog',     label: 'Backlog',     color: '#6b7099' },
+  { key: 'todo',        label: 'To Do',       color: '#60a5fa' },
+  { key: 'in_progress', label: 'In Progress', color: '#fbbf24' },
+  { key: 'review',      label: 'Review',      color: '#a78bfa' },
+  { key: 'done',        label: 'Done',        color: '#4ade80' },
 ];
 const P_LABEL = { low:'🟢 Низкий', medium:'🟡 Средний', high:'🔴 Высокий', critical:'🚨 Критический' };
-const P_CLASS = { low:'p-low', medium:'p-medium', high:'p-high', critical:'p-critical' };
+const P_CLASS  = { low:'p-low', medium:'p-medium', high:'p-high', critical:'p-critical' };
 
 async function req(method, path, body=null, form=false) {
   const headers = {};
@@ -442,6 +430,7 @@ async function boot() {
   if (me.is_admin) {
     document.getElementById('nav-admin').style.display='';
     document.getElementById('nav-admin-tasks').style.display='';
+    document.getElementById('admin-stats').style.display='';
   }
   goPage('dashboard');
 }
@@ -457,10 +446,10 @@ function goPage(name) {
   const titles = {dashboard:'Дашборд',tasks:'Мои задачи',profile:'Профиль',admin:'Пользователи','admin-tasks':'Все задачи'};
   document.getElementById('topbar-title').textContent = titles[name]||'';
   if (name==='dashboard')   loadDashboard();
-  if (name==='tasks')       loadKanban('kanban-board', '/tasks');
+  if (name==='tasks')       loadKanban('kanban-board','/tasks');
   if (name==='profile')     loadProfile();
   if (name==='admin')       loadAdminUsers();
-  if (name==='admin-tasks') loadKanban('admin-kanban-board', '/tasks/admin/all');
+  if (name==='admin-tasks') loadKanban('admin-kanban-board','/tasks/admin/all');
 }
 
 async function loadDashboard() {
@@ -470,6 +459,16 @@ async function loadDashboard() {
     document.getElementById('st-progress').textContent = tasks.filter(t=>t.status==='in_progress').length;
     document.getElementById('st-done').textContent     = tasks.filter(t=>t.status==='done').length;
     document.getElementById('st-critical').textContent = tasks.filter(t=>t.priority==='critical').length;
+
+    // Статистика пользователей — только для админа
+    if (me?.is_admin) {
+      try {
+        const users = await req('GET','/admin/users');
+        document.getElementById('st-users').textContent  = users.length;
+        document.getElementById('st-admins').textContent = users.filter(u=>u.is_admin).length;
+      } catch(e) {}
+    }
+
     const el = document.getElementById('dash-tasks');
     const recent = tasks.slice(-6).reverse();
     el.innerHTML = recent.length ? recent.map(t=>`
@@ -527,7 +526,6 @@ async function openTaskDetail(taskId) {
     const sb = document.getElementById('td-status-badge');
     sb.textContent = stObj?.label || t.status;
     sb.style.color = stObj?.color || 'var(--text-dim)';
-    sb.style.borderColor = stObj?.color || 'var(--border)';
     document.getElementById('td-status-btns').innerHTML = STATUSES.map(s=>`
       <button class="status-btn ${s.key===t.status?'current':''}"
         style="${s.key===t.status?`border-color:${s.color};color:${s.color};background:${s.color}22`:''}"

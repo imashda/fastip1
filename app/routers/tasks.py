@@ -10,6 +10,16 @@ from app.schemas.task import TaskCreate, TaskUpdate, TaskOut
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
+@router.get("/admin/all", response_model=list[TaskOut])
+async def admin_get_all_tasks(
+    session: AsyncSession = Depends(get_session),
+    admin: User = Depends(get_admin_user),
+):
+    """Все задачи всех пользователей (только для админа)."""
+    repo = TaskRepository(session)
+    return await repo.get_all()
+
+
 @router.post("", response_model=TaskOut, status_code=status.HTTP_201_CREATED)
 async def create_task(
     task_data: TaskCreate,
@@ -72,7 +82,6 @@ async def change_status(
         s = TaskStatus(new_status)
     except ValueError:
         raise HTTPException(status_code=400, detail=f"Неверный статус: {new_status}")
-
     repo = TaskRepository(session)
     task = await repo.get_by_id(task_id)
     if task is None:
@@ -95,12 +104,3 @@ async def delete_task(
     if task.owner_id != current_user.id and not current_user.is_admin:
         raise HTTPException(status_code=403, detail="Нет доступа к этой задаче")
     await repo.delete(task)
-
-
-@router.get("/admin/all", response_model=list[TaskOut])
-async def admin_get_all_tasks(
-    session: AsyncSession = Depends(get_session),
-    admin: User = Depends(get_admin_user),
-):
-    repo = TaskRepository(session)
-    return await repo.get_all()

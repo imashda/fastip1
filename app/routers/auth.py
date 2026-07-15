@@ -31,16 +31,7 @@ async def register(
             detail="Пользователь с таким email уже существует",
         )
 
-    user = await repo.create(user_data)
-
-    all_users = await repo.get_all()
-    if len(all_users) == 1:
-        user.is_admin = True
-        await session.commit()
-        await session.refresh(user)
-        logger.info(f"Первый пользователь {user.username} назначен администратором")
-
-    return user
+    return await repo.create(user_data)
 
 
 @router.post("/login", response_model=Token)
@@ -58,6 +49,7 @@ async def login(
             detail="Неверный username или пароль",
         )
 
-    token = create_access_token(data={"sub": user.username})
-    logger.info(f"Успешный вход: username={user.username}")
+    # Кладём user_id в токен, а не username
+    token = create_access_token(data={"sub": str(user.id)})
+    logger.info(f"Успешный вход: username={user.username}, id={user.id}")
     return Token(access_token=token)
